@@ -1,5 +1,252 @@
 # Automated Reference Extraction and BibTeX Generation from IEEE Research Papers: A Cross-Platform Desktop Application 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IEEE Reference Extractor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #3e5aa0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.3) 1px, transparent 1px),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.3) 1px, transparent 1px),
+                radial-gradient(circle at 40% 40%, rgba(255,255,255,0.2) 1px, transparent 1px);
+            background-size: 50px 50px, 75px 75px, 100px 100px;
+        }
+
+        .content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            position: relative;
+        }
+
+        .main-title {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #ffffff, #e8f4fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature {
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+            min-width: 200px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .github-link {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .github-link:hover {
+            background: rgba(255,255,255,0.25);
+            transform: scale(1.05);
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            width: 80px;
+            height: 80px;
+            animation-delay: -0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 20%;
+            right: 15%;
+            width: 60px;
+            height: 60px;
+            animation-delay: -2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 15%;
+            left: 8%;
+            width: 100px;
+            height: 100px;
+            animation-delay: -4s;
+        }
+
+        .floating-element:nth-child(4) {
+            bottom: 25%;
+            right: 10%;
+            width: 70px;
+            height: 70px;
+            animation-delay: -1s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        .tech-badge {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .author-badge {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="bg-pattern"></div>
+        
+        <div class="floating-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+
+        <div class="tech-badge">🔬 Academic Tool</div>
+        <div class="author-badge">👨‍💻 @nwclasantha</div>
+
+        <div class="content">
+            <h1 class="main-title">IEEE Reference Extractor</h1>
+            <p class="subtitle">Streamline Your Academic Citations</p>
+            
+            <div class="features">
+                <div class="feature">
+                    <span class="feature-icon">📄</span>
+                    <div class="feature-title">Extract</div>
+                    <div class="feature-desc">Parse references from documents</div>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">⚡</span>
+                    <div class="feature-title">Format</div>
+                    <div class="feature-desc">IEEE standard formatting</div>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🚀</span>
+                    <div class="feature-title">Automate</div>
+                    <div class="feature-desc">Save time & reduce errors</div>
+                </div>
+            </div>
+
+            <a href="#" class="github-link">
+                🌟 Check it out on GitHub
+            </a>
+        </div>
+    </div>
+</body>
+</html>
+
 ## Abstract
 
 This paper presents a novel desktop application for automated extraction and conversion of bibliographic references from IEEE research papers. The system utilizes Python-based PDF text extraction, natural language processing techniques, and pattern recognition algorithms to identify, parse, and convert reference sections into standardized BibTeX format. The application features a modern Qt-based graphical user interface and implements advanced text processing algorithms to handle various citation formats, Unicode characters, and formatting inconsistencies commonly found in academic publications. Experimental evaluation demonstrates 92% accuracy in reference extraction across a dataset of 150 IEEE papers, with significant time savings compared to manual bibliography management. The tool addresses a critical need in academic workflow automation and provides researchers with an efficient solution for bibliography compilation and citation management.
