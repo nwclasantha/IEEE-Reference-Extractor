@@ -79,6 +79,8 @@ The identification process uses a two-stage approach: (1) initial pattern matchi
 
 ### D. Reference Parsing Algorithm
 
+![image](https://github.com/user-attachments/assets/49ed37b3-c9e0-4ea3-9687-872c5b9fa0ae)
+
 The core innovation of the system lies in its sophisticated reference parsing algorithm, which handles the complexity and variability of IEEE citation formats. The algorithm employs a multi-pattern approach to extract bibliographic information from individual reference entries.
 
 The parsing process begins by segmenting the reference section into individual entries using numbered markers (e.g., [1], [2], etc.). Each entry is then analyzed using a series of specialized regular expressions designed to extract specific bibliographic elements:
@@ -141,12 +143,16 @@ The threading implementation includes:
 
 ### D. Error Handling and Logging
 
+![image](https://github.com/user-attachments/assets/5782ade5-6b00-4a30-8d4a-f3d34c3e705a)
+
 The system implements comprehensive error handling at multiple levels to ensure robust operation. Error handling strategies include:
 
 1. **File-level errors**: Graceful handling of corrupted or inaccessible PDF files
 2. **Parsing errors**: Recovery from malformed reference entries
 3. **Unicode errors**: Proper handling of character encoding issues
 4. **System errors**: Management of insufficient disk space or permission issues
+
+![image](https://github.com/user-attachments/assets/b333f3b4-fff2-4eb4-a981-9dadc5fea327)
 
 The application provides detailed logging information through the interface, enabling users to diagnose and resolve processing issues. Log messages are categorized by severity and include contextual information to facilitate troubleshooting.
 
@@ -155,6 +161,8 @@ The application provides detailed logging information through the interface, ena
 ### A. Dataset and Evaluation Methodology
 
 The system was evaluated using a comprehensive dataset of 150 IEEE conference and journal papers spanning multiple research domains including computer science, electrical engineering, and telecommunications. The dataset was carefully selected to represent diverse citation formats, document structures, and content types commonly encountered in IEEE publications.
+
+![image](https://github.com/user-attachments/assets/7ec0438f-c0e4-4510-9f39-0d4b7de83254)
 
 Ground truth data was established through manual examination of reference sections by domain experts. Each reference entry was manually parsed and converted to BibTeX format to provide accurate comparison baselines. The evaluation metrics included:
 
@@ -181,11 +189,15 @@ The system successfully processed 98% of the input documents, with failures prim
 
 ### C. Performance Analysis
 
+![image](https://github.com/user-attachments/assets/83d7396e-80da-4885-ab96-d680e6b0a101)
+
 Processing speed analysis revealed linear scaling with document length, with the system maintaining consistent performance across papers ranging from 4 to 20 pages. The average processing time of 2.3 seconds per paper represents a significant improvement over manual reference extraction, which typically requires 15-30 minutes per document depending on the number of references.
 
 Memory usage remained stable throughout batch processing operations, with peak memory consumption limited to approximately 150MB regardless of batch size. This efficiency enables processing of large document collections on standard desktop hardware.
 
 ### D. Error Analysis and Limitations
+
+![image](https://github.com/user-attachments/assets/d4e85916-5341-4e30-9ee4-947a5bf95e30)
 
 Analysis of extraction errors revealed several primary failure modes:
 
