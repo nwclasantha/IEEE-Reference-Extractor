@@ -44,6 +44,8 @@ Recent studies have focused on the automatic conversion between different citati
 
 ### A. Overall System Design
 
+![image](https://github.com/user-attachments/assets/7412551e-ada5-4c5e-9701-7c8e31ab054a)
+
 The proposed reference extraction system follows a modular architecture designed for scalability and maintainability. The system consists of four primary components: (1) PDF text extraction module, (2) reference section identification and isolation, (3) reference parsing and data extraction, and (4) BibTeX generation and output formatting.
 
 The architecture implements a pipeline processing approach where each module performs specific transformations on the input data. This design enables independent testing and optimization of individual components while maintaining overall system coherence.
